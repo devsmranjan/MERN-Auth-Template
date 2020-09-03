@@ -2,7 +2,6 @@
   "name": "mern_auth_template",
   "version": "1.0.0",
   "description": "MERN Auth Template",
-  "main": "./server",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node server",

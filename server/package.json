@@ -1,17 +1,35 @@
 {
   "name": "server",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "",
   "private": true,
-  "scripts": {
-    "start": "nodemon ./"
+  "main": "index.js",
+  "engine": {
+    "node": "13.12.0",
+    "npm": "6.14.4"
   },
+  "scripts": {
+    "start": "node ./",
+    "dev": "nodemon ./"
+  },
+  "keywords": [],
+  "author": "Smruti Ranjan Rana",
+  "license": "ISC",
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "@sendgrid/mail": "^7.2.4",
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "express-validator": "^6.6.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.2",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "swagger-ui-express": "^4.1.4"
   }
 }
