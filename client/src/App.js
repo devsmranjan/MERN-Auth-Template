@@ -3,13 +3,13 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 
-function App() {
+const App = () => {
     const getData = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/');
-            console.log(response);
+            const response = await axios.get('/api');
+            console.log(response.data);
         } catch (error) {
-          console.log(error.response);
+            console.log(error.response);
         }
     };
 
@@ -32,6 +32,6 @@ function App() {
             </header>
         </div>
     );
-}
+};
 
 export default App;

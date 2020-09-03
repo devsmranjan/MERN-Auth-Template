@@ -1,33 +1,51 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const express = require('express');
+const app = express();
 
-var app = express();
-
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const cors = require('cors');
 
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
+const dotenv = require('dotenv');
+dotenv.config();
+
+// passport for authentication
+const passport = require('passport');
+// const authenticate = require('./middlewares/authenticated');
+
+// swagger
+const swaggerUI = require('swagger-ui-express');
+// const swaggerDocument = require('./swagger.json');
+
+// mongo db
+const mongoConfig = require('./config/mongo');
+
+// status codes
+const httpStatusCodes = require('./utils/httpStatusCodes');
 
 app.use(logger('dev'));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// data base
+mongoConfig.connectMongo();
+
+// Initialize passport Middleware
+app.use(passport.initialize());
+// require('./middlewares/jwt')(passport);
+
+app.use('/api', require('./routes/index'));
+app.use('/api/users', require('./routes/users'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    next(createError(404));
+    next(createError(httpStatusCodes.NOT_FOUND));
 });
 
 // error handler
@@ -36,14 +54,12 @@ app.use(function (err, req, res, next) {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-    // render the error page
-    // res.status(err.status || 500);
-    res.status(err.status || 500).json({
+    // error response
+    res.status(err.status || httpStatusCodes.INTERNAL_SERVER_ERROR).json({
         success: false,
-        message: 'Error occurred while handling the request.',
+        message: 'Error occurred while handling the request',
         error: err,
     });
-    // res.render('error');
 });
 
 module.exports = app;
