@@ -1,0 +1,20 @@
+{
+  "name": "mern_auth_template",
+  "version": "1.0.0",
+  "description": "MERN Auth Template",
+  "main": "./server",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node server",
+    "server:dev": "nodemon server",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server:dev\" \"npm run client\"",
+    "postinstall": "(cd server && npm i); (cd client && npm i)"
+  },
+  "keywords": [],
+  "author": "Smruti Ranjan Rana",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^5.3.0"
+  }
+}
