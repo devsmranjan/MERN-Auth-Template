@@ -1,11 +1,8 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const Index = require('../controllers/index');
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-    res.status(400).json({
-        message: 'Hello',
-    });
-});
+/* Api Endpoint */
+router.get('/', Index.getIndex);
 
 module.exports = router;

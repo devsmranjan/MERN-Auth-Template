@@ -1,0 +1,376 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "MERN-Auth Template",
+        "version": "1.0",
+        "description": "This is an example of server api documentation",
+        "contact": {
+            "email": "smrutiranjan.developer@gmail.com"
+        }
+    },
+    "servers": [{
+        "url": "http://localhost:5000/api"
+    }],
+    "components": {
+        "schemas": {
+            "login": {
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string",
+                        "minLength": 6
+                    }
+                }
+            },
+            "signup": {
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string",
+                        "maxLength": 100
+                    },
+                    "password": {
+                        "type": "string",
+                        "minLength": 6
+                    }
+                }
+            },
+            "email": {
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    }
+
+                }
+            },
+            "passwordReset": {
+                "properties": {
+                    "password": {
+                        "type": "string",
+                        "minLength": 6
+                    },
+                    "confirmPassword": {
+                        "type": "string",
+                        "minLength": 6
+                    }
+
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "tags": [{
+        "name": "auth",
+        "description": "Authentication endpoint"
+    }, {
+        "name": "user",
+        "description": "User endpoint"
+    }],
+    "paths": {
+        "/": {
+            "get": {
+                "description": "Endpoint of the API",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/auth": {
+            "get": {
+                "tags": [
+                    "auth"
+                ],
+                "description": "Endpoint of Authentication",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "description": "Log In",
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/login"
+                            },
+                            "example": {
+                                "email": "example@email.com",
+                                "password": "******"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "422": {
+                        "description": "Invalid email or password"
+                    },
+                    "401": {
+                        "description": "Not a verified account"
+                    },
+                    "500": {
+                        "description": "Something went wrong"
+                    }
+                }
+            }
+        },
+        "/auth/signup": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "description": "Sign Up",
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/signup"
+                            },
+                            "example": {
+                                "email": "example@email.com",
+                                "username": "myusername",
+                                "password": "******",
+                                "name": "My Name"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "422": {
+                        "description": "Email or Username already exist"
+                    },
+                    "500": {
+                        "description": "Something went wrong"
+                    }
+                }
+            }
+        },
+        "/auth/verify/{token}": {
+            "get": {
+                "tags": [
+                    "auth"
+                ],
+                "description": "Verify email",
+                "parameters": [{
+                    "name": "token",
+                    "in": "path",
+                    "description": "Token",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "422": {
+                        "description": "Unable to verify"
+                    },
+                    "500": {
+                        "description": "Something went wrong"
+                    }
+                }
+            }
+        },
+        "/auth/resend": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "description": "Resend verification token",
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/email"
+                            },
+                            "example": {
+                                "email": "example@email.com"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Email doesn't exist"
+                    },
+                    "422": {
+                        "description": "Account Verified already"
+                    },
+                    "500": {
+                        "description": "Something went wrong"
+                    }
+                }
+            }
+        },
+        "/auth/recover": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "description": "Recover password request",
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/email"
+                            },
+                            "example": {
+                                "email": "example@email.com"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Email doesn't exist"
+                    },
+                    "500": {
+                        "description": "Something went wrong"
+                    }
+                }
+            }
+        },
+        "/auth/reset/{token}": {
+            "get": {
+                "tags": [
+                    "auth"
+                ],
+                "description": "Verify password reset token",
+                "parameters": [{
+                    "name": "token",
+                    "in": "path",
+                    "description": "Token",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Password token Invalid"
+                    },
+                    "500": {
+                        "description": "Something went wrong"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "description": "Reset password request",
+                "parameters": [{
+                    "name": "token",
+                    "in": "path",
+                    "description": "Token",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "requestBody": {
+                    "description": "Description",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/passwordReset"
+                            },
+                            "example": {
+                                "password": "******",
+                                "confirmPassword": "******"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Password Token Invalid"
+                    },
+                    "500": {
+                        "description": "Something went wrong"
+                    }
+                }
+            }
+        },
+        "/user": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "description": "Endpoint of User",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "User not available"
+                    },
+                    "500": {
+                        "description": "Something went wrong"
+                    }
+                }
+            }
+        }
+    }
+}

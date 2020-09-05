@@ -9,6 +9,5 @@ module.exports = {
     UNPROCESSABLE_ENTITY: 422,
     INTERNAL_SERVER_ERROR: 500,
     BAD_GATEWAY: 501,
-    // Service Unavailable
     SERVICE_UNAVAILABLE: 503,
 };
