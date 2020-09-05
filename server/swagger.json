@@ -62,6 +62,27 @@
                     }
 
                 }
+            },
+            "name": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 100
+                    }
+                }
+            },
+            "updatePassword": {
+                "properties": {
+                    "currentPassword": {
+                        "type": "string",
+                        "minLength": 6
+                    },
+                    "newPassword": {
+                        "type": "string",
+                        "minLength": 6
+                    }
+
+                }
             }
         },
         "securitySchemes": {
@@ -71,6 +92,7 @@
                 "bearerFormat": "JWT"
             }
         }
+
     },
     "tags": [{
         "name": "auth",
@@ -350,6 +372,7 @@
                 }
             }
         },
+
         "/user": {
             "get": {
                 "tags": [
@@ -364,7 +387,106 @@
                         "description": "OK"
                     },
                     "401": {
-                        "description": "User not available"
+                        "description": "User not available / Unauthorized"
+                    },
+                    "500": {
+                        "description": "Something went wrong"
+                    }
+                }
+            }
+        },
+        "/user/update": {
+            "put": {
+                "tags": [
+                    "user"
+                ],
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "description": "Update profile",
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/name"
+                            },
+                            "example": {
+                                "name": "John Doe"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "User not available / Unauthorized"
+                    },
+                    "500": {
+                        "description": "Something went wrong"
+                    }
+                }
+            }
+        },
+        "/user/updatePassword": {
+            "put": {
+                "tags": [
+                    "user"
+                ],
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "description": "Update Password",
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/updatePassword"
+                            },
+                            "example": {
+                                "currentPassword": "******",
+                                "newPassword": "******"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Password doesn't match"
+                    },
+                    "401": {
+                        "description": "User not available / Unauthorized"
+                    },
+                    "500": {
+                        "description": "Something went wrong"
+                    }
+                }
+            }
+        },
+        "/user/deleteAccount": {
+            "delete": {
+                "tags": [
+                    "user"
+                ],
+                "security": [{
+                    "bearerAuth": []
+                }],
+                "description": "Delete Account",
+
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "User not available / Unauthorized"
                     },
                     "500": {
                         "description": "Something went wrong"
