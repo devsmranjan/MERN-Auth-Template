@@ -2,7 +2,7 @@
 
 In the project directory, you can run:
 
-### `npm run postinstall`
+### `npm install`
 
 Install all dependencies.
 
