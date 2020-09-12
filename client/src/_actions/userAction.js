@@ -4,6 +4,8 @@ import {
     UPDATE_PROFILE_SUCCESS,
     UPDATE_PROFILE_FAIL,
     USER_PROFILE_DATA_REFRESH,
+    UPDATE_PASSWORD_SUCCESS,
+    UPDATE_PASSWORD_FAIL,
 } from './types';
 import { loadUser } from './authActions';
 
@@ -34,9 +36,6 @@ export const updateProfile = ({ name }) => async (dispatch) => {
                 error.response.data.success,
                 error.response.data.message ||
                     error.response.data.error.name ||
-                    error.response.data.error.email ||
-                    error.response.data.error.username ||
-                    error.response.data.error.password ||
                     'Something went wrong',
                 error.response.data.error,
                 UPDATE_PROFILE_FAIL
@@ -44,6 +43,47 @@ export const updateProfile = ({ name }) => async (dispatch) => {
         );
         dispatch({
             type: UPDATE_PROFILE_FAIL,
+        });
+    }
+};
+
+// update password
+export const updatePassword = ({ currentPassword, newPassword }) => async (
+    dispatch
+) => {
+    // Request body
+    const body = JSON.stringify({ currentPassword, newPassword });
+
+    try {
+        const response = await axios.put(
+            '/api/user/updatePassword',
+            body,
+            tokenConfig()
+        );
+
+        dispatch({
+            type: UPDATE_PASSWORD_SUCCESS,
+            payload: response.data,
+        });
+
+        dispatch({
+            type: USER_PROFILE_DATA_REFRESH,
+        });
+
+        dispatch(loadUser());
+    } catch (error) {
+        dispatch(
+            returnErrors(
+                error.response.data.success,
+                error.response.data.message ||
+                    error.response.data.error.newPassword ||
+                    'Something went wrong',
+                error.response.data.error,
+                UPDATE_PASSWORD_FAIL
+            )
+        );
+        dispatch({
+            type: UPDATE_PASSWORD_FAIL,
         });
     }
 };
