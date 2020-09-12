@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import axios from 'axios';
 import { loadUser } from './actions/authActions';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import Auth from './components/auth';
 
 const App = () => {
-    const auth = useSelector((state) => state.auth);
     const dispatch = useDispatch();
 
     const handleDispatch = () => {
@@ -22,16 +21,15 @@ const App = () => {
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
 
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
+                <Auth />
+
                 <a
-                    className="App-link"
-                    href="https://reactjs.org"
+                    className="App-link mt-4"
+                    href="/api/docs"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Learn React
+                    API Docs
                 </a>
             </header>
         </div>

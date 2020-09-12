@@ -23,7 +23,7 @@ router.post(
             .not()
             .isEmpty()
             .isLength({ min: 6 })
-            .withMessage('Must be at least 6 chars long'),
+            .withMessage('Password must be at least 6 chars long'),
         check('name').not().isEmpty().withMessage('You name is required'),
     ],
     validate,
@@ -67,7 +67,7 @@ router.post(
             .not()
             .isEmpty()
             .isLength({ min: 6 })
-            .withMessage('Must be at least 6 chars long'),
+            .withMessage('Password must be at least 6 chars long'),
         check('confirmPassword', 'Passwords do not match').custom(
             (value, { req }) => value === req.body.password
         ),

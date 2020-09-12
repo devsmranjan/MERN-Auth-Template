@@ -2,18 +2,16 @@ import {
     Modal,
     Button,
     Form,
-    InputGroup,
-    FormControl,
     Alert,
 } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 
 import React, { useState, useEffect } from 'react';
-import { signUp } from '../../actions/authActions';
-import { REGISTER_FAIL, REGISTER_SUCCESS } from '../../actions/types';
+import { logIn } from '../../actions/authActions';
+import { LOGIN_FAIL } from '../../actions/types';
 import { clearErrors } from '../../actions/errorActions';
 
-const RegisterModal = () => {
+const LoginModal = () => {
     const auth = useSelector((state) => state.auth);
     const error = useSelector((state) => state.error);
 
@@ -29,36 +27,27 @@ const RegisterModal = () => {
     const handleShow = () => setShow(true);
 
     // data
-    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     // message
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
-        if (error.id === REGISTER_FAIL) {
+        if (error.id === LOGIN_FAIL) {
             setErrorMessage(error.message);
         } else {
             setErrorMessage('');
         }
 
-        if (show && auth.id === REGISTER_SUCCESS) {
-            alert(auth.message);
+        if (show && auth.isAuthenticated) {
             handleClose();
         }
     }, [error, auth, show]);
 
     // handlers
-    const handleName = (e) => {
-        setName(e.target.value);
-    };
     const handleEmail = (e) => {
         setEmail(e.target.value);
-    };
-    const handleUsername = (e) => {
-        setUsername(e.target.value);
     };
     const handlePassword = (e) => {
         setPassword(e.target.value);
@@ -68,16 +57,16 @@ const RegisterModal = () => {
         e.preventDefault();
 
         // create new user
-        const newUser = { name, email, username, password };
+        const userDetails = { email, password };
 
         // Attempt to register
-        dispatch(signUp(newUser));
+        dispatch(logIn(userDetails));
     };
 
     return (
         <div>
             <Button variant="primary" onClick={handleShow}>
-                Create new account
+                Login
             </Button>
             <Modal
                 show={show}
@@ -86,7 +75,7 @@ const RegisterModal = () => {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Register</Modal.Title>
+                    <Modal.Title>Login</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
@@ -94,16 +83,6 @@ const RegisterModal = () => {
                         <Alert variant="danger">{errorMessage}</Alert>
                     ) : null}
                     <Form onSubmit={(e) => handleSubmit(e)}>
-                        <Form.Group>
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control
-                                placeholder="Smruti Ranjan Rana"
-                                value={name}
-                                name="name"
-                                onChange={(e) => handleName(e)}
-                                required
-                            />
-                        </Form.Group>
                         <Form.Group>
                             <Form.Label>Email</Form.Label>
                             <Form.Control
@@ -114,25 +93,6 @@ const RegisterModal = () => {
                                 onChange={(e) => handleEmail(e)}
                                 required
                             />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Username</Form.Label>
-                            <Form.Label htmlFor="username" srOnly>
-                                Username
-                            </Form.Label>
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text>@</InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <FormControl
-                                    id="username"
-                                    placeholder="Username"
-                                    value={username}
-                                    name="username"
-                                    onChange={(e) => handleUsername(e)}
-                                    required
-                                />
-                            </InputGroup>
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Password</Form.Label>
@@ -146,7 +106,7 @@ const RegisterModal = () => {
                             />
                         </Form.Group>
                         <Button type="submit" variant="dark" block>
-                            Sign Up
+                            Sign In
                         </Button>
                     </Form>
                 </Modal.Body>
@@ -155,4 +115,4 @@ const RegisterModal = () => {
     );
 };
 
-export default RegisterModal;
+export default LoginModal;

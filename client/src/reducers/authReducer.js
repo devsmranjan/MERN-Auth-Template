@@ -14,6 +14,7 @@ const initialState = {
     isAuthenticated: null,
     isLoading: false,
     user: null,
+    id: null,
 };
 
 export default (state = initialState, action) => {
@@ -33,13 +34,22 @@ export default (state = initialState, action) => {
             };
 
         case LOGIN_SUCCESS:
+            localStorage.setItem('token', action.payload.data.token);
+            return {
+                ...state,
+                ...action.payload.data,
+                isAuthenticated: true,
+                isLoading: false,
+                id: LOGIN_SUCCESS,
+            };
+
         case REGISTER_SUCCESS:
-            localStorage.setItem('token', action.payload.token);
             return {
                 ...state,
                 ...action.payload,
-                isAuthenticated: true,
+                isAuthenticated: false,
                 isLoading: false,
+                id: REGISTER_SUCCESS,
             };
 
         case AUTH_ERROR:
@@ -53,6 +63,7 @@ export default (state = initialState, action) => {
                 user: null,
                 isAuthenticated: false,
                 isLoading: false,
+                id: null,
             };
 
         default:
