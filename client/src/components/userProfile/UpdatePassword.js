@@ -3,15 +3,12 @@ import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearErrors } from '../../_actions/errorActions';
 import {
-    UPDATE_PROFILE_FAIL,
-    UPDATE_PROFILE_SUCCESS,
     UPDATE_PASSWORD_FAIL,
     UPDATE_PASSWORD_SUCCESS,
 } from '../../_actions/types';
-import { updateProfile, updatePassword } from '../../_actions/userAction';
+import { updatePassword } from '../../_actions/userAction';
 
 const UpdatePassword = () => {
-    const auth = useSelector((state) => state.auth);
     const userProfile = useSelector((state) => state.userProfile);
     const error = useSelector((state) => state.error);
 
@@ -21,7 +18,6 @@ const UpdatePassword = () => {
     const [show, setShow] = useState(false);
 
     // data
-    // const [name, setName] = useState('');
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
 
@@ -29,9 +25,6 @@ const UpdatePassword = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
-        // setUser(auth.user);
-        // setName(user.name);
-
         if (error.id === UPDATE_PASSWORD_FAIL) {
             setErrorMessage(error.message);
         } else {
@@ -42,7 +35,7 @@ const UpdatePassword = () => {
             alert(userProfile.message);
             handleClose();
         }
-    }, [auth, error, userProfile, show]);
+    }, [error, userProfile, show]);
 
     // handlers
     const handleClose = () => {
@@ -53,10 +46,6 @@ const UpdatePassword = () => {
     const handleShow = () => {
         setShow(true);
     };
-
-    // const handleName = (e) => {
-    //     setName(e.target.value);
-    // };
 
     const handleCurrentPassword = (e) => {
         setCurrentPassword(e.target.value);
@@ -71,9 +60,7 @@ const UpdatePassword = () => {
 
         // data
         const data = { currentPassword, newPassword };
-
-        // dispatch(forgotPassword(userEmail));
-        // dispatch(updateProfile(data));
+        
         dispatch(updatePassword(data));
     };
 

@@ -45,7 +45,6 @@ const RegisterModal = () => {
     }, [error, auth, show]);
 
     // handlers
-
     const handleClose = () => {
         setShow(false);
         dispatch(clearErrors());

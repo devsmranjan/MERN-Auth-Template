@@ -6,7 +6,6 @@ import {
     UPDATE_PROFILE_FAIL,
     UPDATE_PROFILE_SUCCESS,
 } from '../../_actions/types';
-import { forgotPassword } from '../../_actions/authActions';
 import { updateProfile } from '../../_actions/userAction';
 
 const UpdateProfileModal = () => {
@@ -64,7 +63,6 @@ const UpdateProfileModal = () => {
         // data
         const data = { name };
 
-        // dispatch(forgotPassword(userEmail));
         dispatch(updateProfile(data));
     };
 

@@ -58,16 +58,11 @@ const ForgotPasswordModal = () => {
         const userEmail = { email };
 
         // Attempt to register
-        // dispatch(logIn(userDetails));
-
         dispatch(forgotPassword(userEmail));
     };
 
     return (
         <div>
-            {/* <Button variant="primary" onClick={handleShow}>
-                Login
-            </Button> */}
             <h6 onClick={handleShow}>Forgot Password?</h6>
             <Modal
                 show={show}

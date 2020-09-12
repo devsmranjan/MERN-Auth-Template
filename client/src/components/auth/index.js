@@ -10,15 +10,8 @@ import ResendEmailVerificationLink from './ResendEmailVerificationLink';
 const Auth = () => {
     const auth = useSelector((state) => state.auth);
 
-    const [user, setUser] = useState({});
-
-    useEffect(() => {
-        setUser(auth.user);
-    }, [auth]);
-
     const authComponents = (
         <React.Fragment>
-            {/* <h2>{user ? `Welcome ${user.name}` : ''}</h2> */}
             <Logout />
         </React.Fragment>
     );

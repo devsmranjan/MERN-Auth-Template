@@ -5,7 +5,6 @@ import React, { useState, useEffect } from 'react';
 import { logIn } from '../../_actions/authActions';
 import { LOGIN_FAIL } from '../../_actions/types';
 import { clearErrors } from '../../_actions/errorActions';
-import ForgotPasswordModal from './ForgotPasswordModal';
 
 const LoginModal = () => {
     const auth = useSelector((state) => state.auth);
