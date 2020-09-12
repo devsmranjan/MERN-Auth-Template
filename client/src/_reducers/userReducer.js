@@ -1,23 +1,29 @@
-import { GET_ERRORS, CLEAR_ERRORS } from '../actions/types';
+import {
+    UPDATE_PROFILE_FAIL,
+    UPDATE_PROFILE_SUCCESS,
+    USER_PROFILE_DATA_REFRESH,
+} from '../_actions/types';
 
 const initialState = {
     success: false,
-    message: null,
-    error: null,
+    message: '',
     id: null,
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case GET_ERRORS:
+        case UPDATE_PROFILE_SUCCESS:
             return {
+                ...state,
                 success: action.payload.success,
                 message: action.payload.message,
-                error: action.payload.error,
-                id: action.payload.id,
+                id: UPDATE_PROFILE_SUCCESS,
             };
-        case CLEAR_ERRORS:
+
+        case UPDATE_PROFILE_FAIL:
+        case USER_PROFILE_DATA_REFRESH:
             return initialState;
+
         default:
             return state;
     }

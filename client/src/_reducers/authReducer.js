@@ -11,7 +11,8 @@ import {
     FORGOT_PASSWORD_SUCCESS,
     RESEND_EMAIL_VERIFICATION_LINK_FAIL,
     RESEND_EMAIL_VERIFICATION_LINK_SUCCESS,
-} from '../actions/types';
+    AUTH_DATA_REFRESH,
+} from '../_actions/types';
 
 const initialState = {
     token: localStorage.getItem('token'),
@@ -87,6 +88,9 @@ export default (state = initialState, action) => {
                 isLoading: false,
                 id: null,
             };
+
+        case AUTH_DATA_REFRESH:
+            return initialState;
 
         default:
             return state;

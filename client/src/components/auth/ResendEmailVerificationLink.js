@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { clearErrors } from '../../actions/errorActions';
+import { clearErrors } from '../../_actions/errorActions';
 import {
     RESEND_EMAIL_VERIFICATION_LINK_FAIL,
     RESEND_EMAIL_VERIFICATION_LINK_SUCCESS,
-} from '../../actions/types';
-import { resendEmailVerificationLink } from '../../actions/authActions';
+} from '../../_actions/types';
+import { resendEmailVerificationLink } from '../../_actions/authActions';
 
 const ResendEmailVerificationLink = () => {
     const auth = useSelector((state) => state.auth);

@@ -15,6 +15,7 @@ import {
     FORGOT_PASSWORD_SUCCESS,
     RESEND_EMAIL_VERIFICATION_LINK_FAIL,
     RESEND_EMAIL_VERIFICATION_LINK_SUCCESS,
+    AUTH_DATA_REFRESH,
 } from './types';
 
 // Check token & Load user
@@ -148,6 +149,10 @@ export const forgotPassword = ({ email }) => async (dispatch) => {
             type: FORGOT_PASSWORD_SUCCESS,
             payload: response.data,
         });
+
+        dispatch({
+            type: AUTH_DATA_REFRESH,
+        });
     } catch (error) {
         dispatch(
             returnErrors(
@@ -179,6 +184,9 @@ export const resendEmailVerificationLink = ({ email }) => async (dispatch) => {
         dispatch({
             type: RESEND_EMAIL_VERIFICATION_LINK_SUCCESS,
             payload: response.data,
+        });
+        dispatch({
+            type: AUTH_DATA_REFRESH,
         });
     } catch (error) {
         dispatch(

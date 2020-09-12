@@ -18,7 +18,7 @@ const Auth = () => {
 
     const authComponents = (
         <React.Fragment>
-            <h2>{user ? `Welcome ${user.name}` : ''}</h2>
+            {/* <h2>{user ? `Welcome ${user.name}` : ''}</h2> */}
             <Logout />
         </React.Fragment>
     );

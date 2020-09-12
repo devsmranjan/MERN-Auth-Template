@@ -9,9 +9,9 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 
 import React, { useState, useEffect } from 'react';
-import { signUp } from '../../actions/authActions';
-import { REGISTER_FAIL, REGISTER_SUCCESS } from '../../actions/types';
-import { clearErrors } from '../../actions/errorActions';
+import { signUp } from '../../_actions/authActions';
+import { REGISTER_FAIL, REGISTER_SUCCESS } from '../../_actions/types';
+import { clearErrors } from '../../_actions/errorActions';
 
 const RegisterModal = () => {
     const auth = useSelector((state) => state.auth);

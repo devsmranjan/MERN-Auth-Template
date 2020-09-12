@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { clearErrors } from '../../actions/errorActions';
+import { clearErrors } from '../../_actions/errorActions';
 import {
     FORGOT_PASSWORD_FAIL,
     FORGOT_PASSWORD_SUCCESS,
-} from '../../actions/types';
-import { forgotPassword } from '../../actions/authActions';
+} from '../../_actions/types';
+import { forgotPassword } from '../../_actions/authActions';
 
 const ForgotPasswordModal = () => {
     const auth = useSelector((state) => state.auth);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { logOut } from '../../actions/authActions';
+import { logOut } from '../../_actions/authActions';
 
 const Logout = () => {
     const dispatch = useDispatch();

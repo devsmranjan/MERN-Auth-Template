@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { loadUser } from './actions/authActions';
+import { loadUser } from './_actions/authActions';
 import { useDispatch } from 'react-redux';
 import Auth from './components/auth';
+import UserProfile from './components/userProfile';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -20,6 +21,8 @@ const App = () => {
         <div className="App">
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
+
+                <UserProfile />
 
                 <Auth />
 
