@@ -22,12 +22,6 @@ const RegisterModal = () => {
     // modal
     const [show, setShow] = useState(false);
 
-    const handleClose = () => {
-        setShow(false);
-        dispatch(clearErrors());
-    };
-    const handleShow = () => setShow(true);
-
     // data
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -51,6 +45,18 @@ const RegisterModal = () => {
     }, [error, auth, show]);
 
     // handlers
+
+    const handleClose = () => {
+        setShow(false);
+        dispatch(clearErrors());
+        setName('');
+        setEmail('');
+        setUsername('');
+        setPassword('');
+    };
+
+    const handleShow = () => setShow(true);
+
     const handleName = (e) => {
         setName(e.target.value);
     };

@@ -16,12 +16,6 @@ const LoginModal = () => {
     // modal
     const [show, setShow] = useState(false);
 
-    const handleClose = () => {
-        setShow(false);
-        dispatch(clearErrors());
-    };
-    const handleShow = () => setShow(true);
-
     // data
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -42,6 +36,15 @@ const LoginModal = () => {
     }, [error, auth, show]);
 
     // handlers
+    const handleClose = () => {
+        setShow(false);
+        dispatch(clearErrors());
+        setEmail('');
+        setPassword('');
+    };
+
+    const handleShow = () => setShow(true);
+
     const handleEmail = (e) => {
         setEmail(e.target.value);
     };

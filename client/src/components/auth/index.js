@@ -5,6 +5,7 @@ import Logout from './Logout';
 import { useSelector } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
 import ForgotPasswordModal from './ForgotPasswordModal';
+import ResendEmailVerificationLink from './ResendEmailVerificationLink';
 
 const Auth = () => {
     const auth = useSelector((state) => state.auth);
@@ -28,6 +29,7 @@ const Auth = () => {
             <RegisterModal />
             <div className="mt-4">
                 <ForgotPasswordModal />
+                <ResendEmailVerificationLink />
             </div>
         </React.Fragment>
     );

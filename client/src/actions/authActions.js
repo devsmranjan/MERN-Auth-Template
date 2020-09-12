@@ -11,6 +11,10 @@ import {
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
     REGISTER_FAIL,
+    FORGOT_PASSWORD_FAIL,
+    FORGOT_PASSWORD_SUCCESS,
+    RESEND_EMAIL_VERIFICATION_LINK_FAIL,
+    RESEND_EMAIL_VERIFICATION_LINK_SUCCESS,
 } from './types';
 
 // Check token & Load user
@@ -124,6 +128,70 @@ export const logOut = () => {
     return {
         type: LOGOUT_SUCCESS,
     };
+};
+
+// forgot password
+export const forgotPassword = ({ email }) => async (dispatch) => {
+    // Headers
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+
+    // Request body
+    const body = JSON.stringify({ email });
+
+    try {
+        const response = await axios.post('/api/auth/recover', body, config);
+        dispatch({
+            type: FORGOT_PASSWORD_SUCCESS,
+            payload: response.data,
+        });
+    } catch (error) {
+        dispatch(
+            returnErrors(
+                error.response.data.success,
+                error.response.data.message ||
+                    error.response.data.error.email ||
+                    'Something went wrong',
+                error.response.data.error,
+                FORGOT_PASSWORD_FAIL
+            )
+        );
+    }
+};
+
+// forgot password
+export const resendEmailVerificationLink = ({ email }) => async (dispatch) => {
+    // Headers
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+
+    // Request body
+    const body = JSON.stringify({ email });
+
+    try {
+        const response = await axios.post('/api/auth/resend', body, config);
+        dispatch({
+            type: RESEND_EMAIL_VERIFICATION_LINK_SUCCESS,
+            payload: response.data,
+        });
+    } catch (error) {
+        dispatch(
+            returnErrors(
+                error.response.data.success,
+                error.response.data.message ||
+                    error.response.data.error.email ||
+                    'Something went wrong',
+                error.response.data.error,
+                RESEND_EMAIL_VERIFICATION_LINK_FAIL
+            )
+        );
+    }
 };
 
 // Setup config/headers & token

@@ -7,6 +7,10 @@ import {
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
     REGISTER_FAIL,
+    FORGOT_PASSWORD_FAIL,
+    FORGOT_PASSWORD_SUCCESS,
+    RESEND_EMAIL_VERIFICATION_LINK_FAIL,
+    RESEND_EMAIL_VERIFICATION_LINK_SUCCESS,
 } from '../actions/types';
 
 const initialState = {
@@ -50,6 +54,24 @@ export default (state = initialState, action) => {
                 isAuthenticated: false,
                 isLoading: false,
                 id: REGISTER_SUCCESS,
+            };
+
+        case FORGOT_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                ...action.payload,
+                isAuthenticated: false,
+                isLoading: false,
+                id: FORGOT_PASSWORD_SUCCESS,
+            };
+
+        case RESEND_EMAIL_VERIFICATION_LINK_SUCCESS:
+            return {
+                ...state,
+                ...action.payload,
+                isAuthenticated: false,
+                isLoading: false,
+                id: RESEND_EMAIL_VERIFICATION_LINK_SUCCESS,
             };
 
         case AUTH_ERROR:

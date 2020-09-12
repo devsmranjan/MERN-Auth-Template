@@ -3,12 +3,12 @@ import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearErrors } from '../../actions/errorActions';
 import {
-    FORGOT_PASSWORD_FAIL,
-    FORGOT_PASSWORD_SUCCESS,
+    RESEND_EMAIL_VERIFICATION_LINK_FAIL,
+    RESEND_EMAIL_VERIFICATION_LINK_SUCCESS,
 } from '../../actions/types';
-import { forgotPassword } from '../../actions/authActions';
+import { resendEmailVerificationLink } from '../../actions/authActions';
 
-const ForgotPasswordModal = () => {
+const ResendEmailVerificationLink = () => {
     const auth = useSelector((state) => state.auth);
     const error = useSelector((state) => state.error);
 
@@ -24,13 +24,13 @@ const ForgotPasswordModal = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
-        if (error.id === FORGOT_PASSWORD_FAIL) {
+        if (error.id === RESEND_EMAIL_VERIFICATION_LINK_FAIL) {
             setErrorMessage(error.message);
         } else {
             setErrorMessage('');
         }
 
-        if (show && auth.id == FORGOT_PASSWORD_SUCCESS) {
+        if (show && auth.id == RESEND_EMAIL_VERIFICATION_LINK_SUCCESS) {
             alert(auth.message);
             handleClose();
         }
@@ -57,18 +57,12 @@ const ForgotPasswordModal = () => {
         // user email
         const userEmail = { email };
 
-        // Attempt to register
-        // dispatch(logIn(userDetails));
-
-        dispatch(forgotPassword(userEmail));
+        dispatch(resendEmailVerificationLink(userEmail));
     };
 
     return (
         <div>
-            {/* <Button variant="primary" onClick={handleShow}>
-                Login
-            </Button> */}
-            <h6 onClick={handleShow}>Forgot Password?</h6>
+            <h6 onClick={handleShow}>Resend Email Verification Link</h6>
             <Modal
                 show={show}
                 onHide={handleClose}
@@ -76,7 +70,7 @@ const ForgotPasswordModal = () => {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Forgot Password</Modal.Title>
+                    <Modal.Title>Resend Email Verification Link</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
@@ -106,4 +100,4 @@ const ForgotPasswordModal = () => {
     );
 };
 
-export default ForgotPasswordModal;
+export default ResendEmailVerificationLink;
