@@ -4,6 +4,7 @@ import RegisterModal from './RegisterModal';
 import Logout from './Logout';
 import { useSelector } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
+import ForgotPasswordModal from './ForgotPasswordModal';
 
 const Auth = () => {
     const auth = useSelector((state) => state.auth);
@@ -25,6 +26,9 @@ const Auth = () => {
         <React.Fragment>
             <LoginModal />
             <RegisterModal />
+            <div className="mt-4">
+                <ForgotPasswordModal />
+            </div>
         </React.Fragment>
     );
 

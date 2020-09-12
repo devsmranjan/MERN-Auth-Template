@@ -1,13 +1,9 @@
+import React, { useState } from 'react';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-
-import React, { useState, useEffect } from 'react';
-import { logIn } from '../../actions/authActions';
-import { LOGIN_FAIL } from '../../actions/types';
 import { clearErrors } from '../../actions/errorActions';
-import ForgotPasswordModal from './ForgotPasswordModal';
 
-const LoginModal = () => {
+const ForgotPasswordModal = () => {
     const auth = useSelector((state) => state.auth);
     const error = useSelector((state) => state.error);
 
@@ -20,51 +16,38 @@ const LoginModal = () => {
         setShow(false);
         dispatch(clearErrors());
     };
-    const handleShow = () => setShow(true);
+
+    const handleShow = () => {
+        setShow(true);
+    };
 
     // data
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
 
     // message
     const [errorMessage, setErrorMessage] = useState('');
-
-    useEffect(() => {
-        if (error.id === LOGIN_FAIL) {
-            setErrorMessage(error.message);
-        } else {
-            setErrorMessage('');
-        }
-
-        if (show && auth.isAuthenticated) {
-            handleClose();
-        }
-    }, [error, auth, show]);
 
     // handlers
     const handleEmail = (e) => {
         setEmail(e.target.value);
     };
 
-    const handlePassword = (e) => {
-        setPassword(e.target.value);
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
         // create new user
-        const userDetails = { email, password };
+        // const userDetails = { email, password };
 
         // Attempt to register
-        dispatch(logIn(userDetails));
+        // dispatch(logIn(userDetails));
     };
 
     return (
         <div>
-            <Button variant="primary" onClick={handleShow}>
+            {/* <Button variant="primary" onClick={handleShow}>
                 Login
-            </Button>
+            </Button> */}
+            <h6 onClick={handleShow}>Forgot Password?</h6>
             <Modal
                 show={show}
                 onHide={handleClose}
@@ -72,7 +55,7 @@ const LoginModal = () => {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Login</Modal.Title>
+                    <Modal.Title>Forgot Password</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
@@ -91,19 +74,9 @@ const LoginModal = () => {
                                 required
                             />
                         </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Password"
-                                value={password}
-                                name="password"
-                                onChange={(e) => handlePassword(e)}
-                                required
-                            />
-                        </Form.Group>
+
                         <Button type="submit" variant="dark" block>
-                            Sign In
+                            Send Verification Link
                         </Button>
                     </Form>
                 </Modal.Body>
@@ -112,4 +85,4 @@ const LoginModal = () => {
     );
 };
 
-export default LoginModal;
+export default ForgotPasswordModal;
