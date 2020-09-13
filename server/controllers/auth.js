@@ -82,11 +82,18 @@ exports.logIn = async (req, res) => {
             });
 
         // Login successful, write token, and send back user
+        const userData = {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            username: user.username,
+        };
+
         res.status(httpStatusCodes.OK).json({
             success: true,
             data: {
                 token: user.generateJWT(),
-                user: user,
+                user: userData,
             },
         });
     } catch (error) {

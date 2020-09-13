@@ -18,10 +18,17 @@ exports.getUser = async (req, res) => {
             });
         }
 
+        const userData = {
+            id: userById.id,
+            name: userById.name,
+            email: userById.email,
+            username: userById.username,
+        };
+
         res.status(httpStatusCodes.OK).json({
             success: true,
             data: {
-                user: userById,
+                user: userData,
             },
         });
     } catch (error) {
@@ -50,11 +57,18 @@ exports.updateProfileDetails = async (req, res) => {
         userById.name = req.body.name ? req.body.name : userById.name;
         await userById.save();
 
+        const userData = {
+            id: userById.id,
+            name: userById.name,
+            email: userById.email,
+            username: userById.username,
+        };
+
         res.status(httpStatusCodes.OK).json({
             success: true,
             message: messages.SUCCESS_PROFILE_UPDATED,
             data: {
-                user: userById,
+                user: userData,
             },
         });
     } catch (error) {
@@ -98,11 +112,19 @@ exports.updatePassword = async (req, res) => {
 
         await userById.save();
 
+
+        const userData = {
+            id: userById.id,
+            name: userById.name,
+            email: userById.email,
+            username: userById.username,
+        };
+
         res.status(httpStatusCodes.OK).json({
             success: true,
             message: messages.SUCCESS_PASSWORD_UPDATE,
             data: {
-                user: userById,
+                user: userData,
             },
         });
     } catch (error) {
@@ -134,7 +156,6 @@ exports.deleteAccount = async (req, res) => {
             success: true,
             message: messages.SUCCESS_ACCOUNT_DELETE,
         });
-
     } catch (error) {
         res.status(httpStatusCodes.INTERNAL_SERVER_ERROR).json({
             success: false,
