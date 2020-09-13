@@ -17,6 +17,7 @@ import {
     RESEND_EMAIL_VERIFICATION_LINK_SUCCESS,
     AUTH_DATA_REFRESH,
 } from './types';
+import apiEndpoints from '../utils/apiEndpoints';
 
 // Check token & Load user
 export const loadUser = () => async (dispatch, getState) => {
@@ -26,7 +27,10 @@ export const loadUser = () => async (dispatch, getState) => {
     });
 
     try {
-        const response = await axios.get('/api/user', tokenConfig(getState));
+        const response = await axios.get(
+            apiEndpoints.USER_ENDPOINT,
+            tokenConfig(getState)
+        );
 
         dispatch({
             type: USER_LOADED,
@@ -61,7 +65,11 @@ export const signUp = ({ name, email, username, password }) => async (
     const body = JSON.stringify({ name, email, username, password });
 
     try {
-        const response = await axios.post('/api/auth/signup', body, config);
+        const response = await axios.post(
+            apiEndpoints.AUTH_SIGNUP,
+            body,
+            config
+        );
 
         dispatch({
             type: REGISTER_SUCCESS,
@@ -100,7 +108,11 @@ export const logIn = ({ email, password }) => async (dispatch) => {
     const body = JSON.stringify({ email, password });
 
     try {
-        const response = await axios.post('/api/auth/login', body, config);
+        const response = await axios.post(
+            apiEndpoints.AUTH_LOGIN,
+            body,
+            config
+        );
 
         dispatch({
             type: LOGIN_SUCCESS,
@@ -144,7 +156,11 @@ export const forgotPassword = ({ email }) => async (dispatch) => {
     const body = JSON.stringify({ email });
 
     try {
-        const response = await axios.post('/api/auth/recover', body, config);
+        const response = await axios.post(
+            apiEndpoints.AUTH_RECOVER,
+            body,
+            config
+        );
         dispatch({
             type: FORGOT_PASSWORD_SUCCESS,
             payload: response.data,
@@ -180,7 +196,11 @@ export const resendEmailVerificationLink = ({ email }) => async (dispatch) => {
     const body = JSON.stringify({ email });
 
     try {
-        const response = await axios.post('/api/auth/resend', body, config);
+        const response = await axios.post(
+            apiEndpoints.AUTH_VERIFY_EMAIL_RESEND,
+            body,
+            config
+        );
         dispatch({
             type: RESEND_EMAIL_VERIFICATION_LINK_SUCCESS,
             payload: response.data,

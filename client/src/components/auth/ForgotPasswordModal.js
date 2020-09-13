@@ -30,7 +30,7 @@ const ForgotPasswordModal = () => {
             setErrorMessage('');
         }
 
-        if (show && auth.id == FORGOT_PASSWORD_SUCCESS) {
+        if (show && auth.id === FORGOT_PASSWORD_SUCCESS) {
             alert(auth.message);
             handleClose();
         }

@@ -5,6 +5,7 @@ const User = require('../models/User.model');
 const EmailVerificationToken = require('../models/EmailVerificationToken.model');
 const httpStatusCodes = require('../utils/httpStatusCodes');
 const messages = require('../utils/messages');
+const apiEndpoints = require('../utils/apiEndpoints');
 
 // auth endpoint
 exports.authEndpoint = (req, res) => {
@@ -220,7 +221,7 @@ exports.recoverPassword = async (req, res) => {
             req.protocol +
             '://' +
             req.headers.host +
-            '/api/auth/reset/' +
+            apiEndpoints.AUTH_RESET_FULL +
             user.resetPasswordToken;
 
         const mailOptions = {
@@ -335,7 +336,7 @@ const sendEmail = async (user, req, res) => {
             req.protocol +
             '://' +
             req.headers.host +
-            '/api/auth/verify/' +
+            apiEndpoints.AUTH_VERIFY_FULL +
             emailVerficationToken.token;
 
         const mailOptions = {

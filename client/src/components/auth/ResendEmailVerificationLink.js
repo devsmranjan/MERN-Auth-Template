@@ -30,7 +30,7 @@ const ResendEmailVerificationLink = () => {
             setErrorMessage('');
         }
 
-        if (show && auth.id == RESEND_EMAIL_VERIFICATION_LINK_SUCCESS) {
+        if (show && auth.id === RESEND_EMAIL_VERIFICATION_LINK_SUCCESS) {
             alert(auth.message);
             handleClose();
         }

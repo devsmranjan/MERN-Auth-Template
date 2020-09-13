@@ -8,6 +8,7 @@ import {
     UPDATE_PASSWORD_FAIL,
 } from './types';
 import { loadUser } from './authActions';
+import apiEndpoints from '../utils/apiEndpoints';
 
 export const updateProfile = ({ name }) => async (dispatch) => {
     // Request body
@@ -15,7 +16,7 @@ export const updateProfile = ({ name }) => async (dispatch) => {
 
     try {
         const response = await axios.put(
-            '/api/user/update',
+            apiEndpoints.USER_UPDATE,
             body,
             tokenConfig()
         );
@@ -56,7 +57,7 @@ export const updatePassword = ({ currentPassword, newPassword }) => async (
 
     try {
         const response = await axios.put(
-            '/api/user/updatePassword',
+            apiEndpoints.USER_UPDATE_PASSWORD,
             body,
             tokenConfig()
         );
