@@ -4,6 +4,8 @@ import {
     USER_PROFILE_DATA_REFRESH,
     UPDATE_PASSWORD_FAIL,
     UPDATE_PASSWORD_SUCCESS,
+    DELETE_ACCOUNT_FAIL,
+    DELETE_ACCOUNT_SUCCESS,
 } from '../_actions/types';
 
 const initialState = {
@@ -29,6 +31,21 @@ export default (state = initialState, action) => {
                 message: action.payload.message,
                 id: UPDATE_PASSWORD_SUCCESS,
             };
+
+        case DELETE_ACCOUNT_FAIL:
+            return {
+                ...state,
+                success: action.payload.success,
+                message: action.payload.message,
+                id: DELETE_ACCOUNT_FAIL,
+            };
+
+        case DELETE_ACCOUNT_SUCCESS:
+            return {
+                ...state,
+                ...action.payload,
+                id: DELETE_ACCOUNT_SUCCESS
+            }
 
         case UPDATE_PROFILE_FAIL:
         case UPDATE_PASSWORD_FAIL:

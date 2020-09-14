@@ -8,4 +8,5 @@ module.exports = {
     USER_ENDPOINT: '/api/user',
     USER_UPDATE: '/api/user/update',
     USER_UPDATE_PASSWORD: '/api/user/updatePassword',
+    USER_DELETE: '/api/user/deleteAccount',
 };

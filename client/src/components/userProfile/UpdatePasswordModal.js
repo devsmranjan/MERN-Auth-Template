@@ -8,7 +8,7 @@ import {
 } from '../../_actions/types';
 import { updatePassword } from '../../_actions/userAction';
 
-const UpdatePassword = () => {
+const UpdatePasswordModal = () => {
     const userProfile = useSelector((state) => state.userProfile);
     const error = useSelector((state) => state.error);
 
@@ -116,4 +116,4 @@ const UpdatePassword = () => {
     );
 };
 
-export default UpdatePassword;
+export default UpdatePasswordModal;

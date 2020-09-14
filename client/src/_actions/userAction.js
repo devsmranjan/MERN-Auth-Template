@@ -6,6 +6,10 @@ import {
     USER_PROFILE_DATA_REFRESH,
     UPDATE_PASSWORD_SUCCESS,
     UPDATE_PASSWORD_FAIL,
+    AUTH_DATA_REFRESH,
+    DELETE_ACCOUNT_FAIL,
+    DELETE_ACCOUNT_SUCCESS,
+    LOGOUT_SUCCESS,
 } from './types';
 import { loadUser } from './authActions';
 import apiEndpoints from '../utils/apiEndpoints';
@@ -85,6 +89,29 @@ export const updatePassword = ({ currentPassword, newPassword }) => async (
         );
         dispatch({
             type: UPDATE_PASSWORD_FAIL,
+        });
+    }
+};
+
+// update password
+export const deleteAccount = () => async (dispatch) => {
+    try {
+        await axios.delete(apiEndpoints.USER_DELETE, tokenConfig());
+
+        dispatch(loadUser());
+    } catch (error) {
+        dispatch(
+            returnErrors(
+                error.response.data.success,
+                error.response.data.message || 'Something went wrong',
+                error.response.data.error,
+                DELETE_ACCOUNT_FAIL
+            )
+        );
+        dispatch({
+            type: DELETE_ACCOUNT_FAIL,
+            success: error.response.data.success,
+            message: error.response.data.message || 'Something went wrong',
         });
     }
 };

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import UpdateProfileModal from './UpdateProfileModal';
-import UpdatePassword from './UpdatePassword';
+import UpdatePasswordModal from './UpdatePasswordModal';
 import { useSelector } from 'react-redux';
+import DeleteAccountModal from './DeleteAccount';
 
 const UserProfile = () => {
     const auth = useSelector((state) => state.auth);
@@ -16,7 +17,8 @@ const UserProfile = () => {
         <React.Fragment>
             <h2>{user ? `Welcome ${user.name}` : ''}</h2>
             <UpdateProfileModal />
-            <UpdatePassword />
+            <UpdatePasswordModal />
+            <DeleteAccountModal />
         </React.Fragment>
     );
 
