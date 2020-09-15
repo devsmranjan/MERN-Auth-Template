@@ -1,4 +1,4 @@
-import React, {  useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Button, Spinner } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { verifyEmail } from '../../../_actions/authActions';
@@ -19,7 +19,19 @@ const VerifyEmailLink = (props) => {
         dispatch(verifyEmail(evToken));
     }, []);
 
-    const invalidTokenComponent = <div>{error.message}</div>;
+    const invalidTokenComponent = (
+        <div>
+            <h1>{error.message}</h1>
+            <Button
+                varient="primary"
+                onClick={() => {
+                    props.history.push('/');
+                }}
+            >
+                Go To Home Page
+            </Button>
+        </div>
+    );
 
     const validTokenComponent = (
         <div>

@@ -25,7 +25,19 @@ const ResetPassword = (props) => {
         dispatch(checkResetPasswordLink(pToken));
     }, []);
 
-    const invalidTokenComponent = <div>{error.message}</div>;
+    const invalidTokenComponent = (
+        <div>
+            <h1>{error.message}</h1>
+            <Button
+                varient="primary"
+                onClick={() => {
+                    props.history.push('/');
+                }}
+            >
+                Go To Home Page
+            </Button>
+        </div>
+    );
 
     const validTokenComponent = <ResetPasswordForm pToken={passwordToken} />;
 
