@@ -34,6 +34,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, '../client/build')));
+// app.use(express.static('public'));
+
+// app.use((req, res, next) => {
+//     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+// });
 
 // data base
 mongoConfig.connectMongo();

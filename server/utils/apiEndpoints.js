@@ -17,4 +17,8 @@ module.exports = {
     USER_UPDATE: '/update',
     USER_UPDATE_PASSWORD: '/updatePassword',
     USER_DELETE_ACCOUNT: '/deleteAccount',
+
+    // Client
+    CLIENT_RESET_PASSWORD_PATH: '/resetPassword',
+    CLIENT_EMAIL_VERIFICATION_PATH: '/verifyEmail',
 };

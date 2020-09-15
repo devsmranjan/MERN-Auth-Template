@@ -10,6 +10,11 @@ import {
     FORGOT_PASSWORD_SUCCESS,
     RESEND_EMAIL_VERIFICATION_LINK_SUCCESS,
     AUTH_DATA_REFRESH,
+    RESET_PASSWORD_TOKEN_SUCCESS,
+    RESET_PASSWORD_TOKEN_FAIL,
+    RESET_PASSWORD_SUCCESS,
+    EMAIL_VERIFICATION_SUCCESS,
+    EMAIL_VERIFICATION_FAIL,
 } from '../_actions/types';
 
 const initialState = {
@@ -85,6 +90,42 @@ export default (state = initialState, action) => {
                 isAuthenticated: false,
                 isLoading: false,
                 id: null,
+            };
+
+        case RESET_PASSWORD_TOKEN_SUCCESS:
+            return {
+                ...state,
+                ...action.payload,
+                isLoading: false,
+                id: RESET_PASSWORD_TOKEN_SUCCESS,
+            };
+        case RESET_PASSWORD_TOKEN_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                id: RESET_PASSWORD_TOKEN_FAIL,
+            };
+
+        case RESET_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                ...action.payload.data,
+                id: RESET_PASSWORD_SUCCESS,
+            };
+
+        case EMAIL_VERIFICATION_SUCCESS:
+            return {
+                ...state,
+                ...action.payload,
+                isLoading: false,
+                id: EMAIL_VERIFICATION_SUCCESS,
+            };
+
+        case EMAIL_VERIFICATION_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                id: EMAIL_VERIFICATION_FAIL,
             };
 
         case AUTH_DATA_REFRESH:

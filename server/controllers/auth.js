@@ -6,6 +6,7 @@ const EmailVerificationToken = require('../models/EmailVerificationToken.model')
 const httpStatusCodes = require('../utils/httpStatusCodes');
 const messages = require('../utils/messages');
 const apiEndpoints = require('../utils/apiEndpoints');
+const constants = require('../utils/constants');
 
 // auth endpoint
 exports.authEndpoint = (req, res) => {
@@ -108,6 +109,13 @@ exports.logIn = async (req, res) => {
 
 // Verify Email
 exports.verifyEmail = async (req, res) => {
+    const isRequestFromClient = req.query.client;
+
+    if (!isRequestFromClient)
+        return res.redirect(
+            `${constants.CLIENT_URL}${apiEndpoints.CLIENT_EMAIL_VERIFICATION_PATH}/${req.params.token}`
+        );
+
     if (!req.params.token) {
         return res.status(httpStatusCodes.UNPROCESSABLE_ENTITY).json({
             success: false,
@@ -235,7 +243,7 @@ exports.recoverPassword = async (req, res) => {
 
         res.status(httpStatusCodes.OK).json({
             success: true,
-            message: 'A reset email link has been sent to ' + user.email,
+            message: 'A reset password link has been sent to ' + user.email,
         });
     } catch (error) {
         res.status(httpStatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -248,9 +256,15 @@ exports.recoverPassword = async (req, res) => {
 
 // Reset GET - When user give a get request to the reset link
 exports.checkResetPasswordLink = async (req, res) => {
-    try {
-        const { token } = req.params;
+    const isRequestFromClient = req.query.client;
+    const { token } = req.params;
 
+    if (!isRequestFromClient)
+        return res.redirect(
+            `${constants.CLIENT_URL}${apiEndpoints.CLIENT_RESET_PASSWORD_PATH}/${token}`
+        );
+
+    try {
         const user = await User.findOne({
             resetPasswordToken: token,
             resetPasswordExpires: { $gt: Date.now() },

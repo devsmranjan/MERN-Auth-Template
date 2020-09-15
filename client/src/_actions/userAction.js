@@ -6,10 +6,7 @@ import {
     USER_PROFILE_DATA_REFRESH,
     UPDATE_PASSWORD_SUCCESS,
     UPDATE_PASSWORD_FAIL,
-    AUTH_DATA_REFRESH,
     DELETE_ACCOUNT_FAIL,
-    DELETE_ACCOUNT_SUCCESS,
-    LOGOUT_SUCCESS,
 } from './types';
 import { loadUser } from './authActions';
 import apiEndpoints from '../utils/apiEndpoints';

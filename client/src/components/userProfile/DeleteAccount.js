@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button, Form, Alert } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearErrors } from '../../_actions/errorActions';
 import { deleteAccount } from '../../_actions/userAction';
-import {
-    DELETE_ACCOUNT_FAIL,
-    DELETE_ACCOUNT_SUCCESS,
-} from '../../_actions/types';
+import { DELETE_ACCOUNT_FAIL } from '../../_actions/types';
 
 const DeleteAccountModal = () => {
-    const userProfile = useSelector((state) => state.userProfile);
     const error = useSelector((state) => state.error);
 
     const dispatch = useDispatch();
