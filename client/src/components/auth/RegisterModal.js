@@ -31,6 +31,16 @@ const RegisterModal = () => {
     // message
     const [errorMessage, setErrorMessage] = useState('');
 
+    // handlers
+    const handleClose = () => {
+        setShow(false);
+        dispatch(clearErrors());
+        setName('');
+        setEmail('');
+        setUsername('');
+        setPassword('');
+    };
+
     useEffect(() => {
         if (error.id === REGISTER_FAIL) {
             setErrorMessage(error.message);
@@ -43,16 +53,6 @@ const RegisterModal = () => {
             handleClose();
         }
     }, [error, auth, show]);
-
-    // handlers
-    const handleClose = () => {
-        setShow(false);
-        dispatch(clearErrors());
-        setName('');
-        setEmail('');
-        setUsername('');
-        setPassword('');
-    };
 
     const handleShow = () => setShow(true);
 

@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react';
-import UserProfile from '../UserProfile';
+import React from 'react';
 import Auth from '../Auth';
 import logo from '../../logo.svg';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadUser } from '../../_actions/authActions';
+import { useSelector } from 'react-redux';
 import Home from '../Home';
 import { Spinner } from 'react-bootstrap';
 
@@ -35,6 +33,8 @@ const Root = () => {
                 >
                     API Docs
                 </a>
+            </div>
+            <div>
                 <a
                     className="App-link mt-4"
                     href="https://github.com/devsmranjan/MERN-Auth-Template"
