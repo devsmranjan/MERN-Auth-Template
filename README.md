@@ -12,6 +12,8 @@ Runs the app in the development mode.
 
 ## .env file
 
+Put the .env file at the root directory.
+
 -   MONGO_URI=<"Your Mongo DB Url">
 -   JWT_SECRET=<"Your JWT secret string">
 -   SENDGRID_API_KEY=<"Your Sandgrid API Key">
