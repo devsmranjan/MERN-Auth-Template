@@ -35,7 +35,7 @@ const VerifyEmailLink = (props) => {
 
     const validTokenComponent = (
         <div>
-            <h1>Email Verified Successfully</h1>
+            <h1>This account has been verified</h1>
             <Button
                 varient="primary"
                 onClick={() => {
