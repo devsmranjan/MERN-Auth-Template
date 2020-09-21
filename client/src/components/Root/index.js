@@ -35,6 +35,14 @@ const Root = () => {
                 >
                     API Docs
                 </a>
+                <a
+                    className="App-link mt-4"
+                    href="https://github.com/devsmranjan/MERN-Auth-Template"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Github Repo
+                </a>
             </div>
         </div>
     );
