@@ -4,7 +4,7 @@ import UpdatePasswordModal from './UpdatePasswordModal';
 import { useSelector } from 'react-redux';
 import DeleteAccountModal from './DeleteAccount';
 import { Redirect } from 'react-router-dom';
-import Logout from '../Auth/Logout';
+import Logout from '../auth/Logout';
 
 const UserProfile = () => {
     const auth = useSelector((state) => state.auth);
