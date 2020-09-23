@@ -1,5 +1,5 @@
 import React from 'react';
-import Auth from '../auth';
+import Auth from '../Auth';
 import logo from '../../logo.svg';
 import { useSelector } from 'react-redux';
 import Home from '../Home';
