@@ -1,11 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import Home from './components/Root';
-import {
-    Switch,
-    Route,
-    withRouter,
-} from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import ResetPassword from './components/Auth/ResetPassword';
 import VerifyEmailLink from './components/Auth/VerifyEmailLink';
 import routes from './utils/routes';
