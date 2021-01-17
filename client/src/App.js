@@ -1,41 +1,25 @@
-import React, { useEffect } from 'react';
-import './App.css';
-import Home from './components/Root';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import ResetPassword from './components/Auth/ResetPassword';
-import VerifyEmailLink from './components/Auth/VerifyEmailLink';
+import HomePage from './pages/Home';
+import Root from './Root';
 import routes from './utils/routes';
-import { useDispatch } from 'react-redux';
-import { loadUser } from './_actions/authActions';
+import './App.css';
+import LoginPage from './pages/Login';
+import SignupPage from './pages/Signup';
+import UserPage from './pages/User';
 
-const App = (props) => {
-    const dispatch = useDispatch();
-    const pathName = props.location.pathname;
-
-    useEffect(() => {
-        if (
-            !pathName.includes('/resetPassword') &&
-            !pathName.includes('/verifyEmail')
-        ) {
-            dispatch(loadUser());
-        }
-    }, []);
-
+function App() {
     return (
         <div className="App">
             <Switch>
-                <Route exact path="/" component={Home}></Route>
-                <Route
-                    path={routes.RESET_PASSWORD}
-                    component={ResetPassword}
-                ></Route>
-                <Route
-                    path={routes.VERIFY_EMAIL}
-                    component={VerifyEmailLink}
-                ></Route>
+                <Route exact path="/" component={Root} />
+                <Route exact path={routes.LOGIN_PAGE} component={LoginPage} />
+                <Route exact path={routes.SIGNUP_PAGE} component={SignupPage} />
+                <Route exact path={routes.USER_PAGE} component={UserPage} />
+
+                <Route render={() => <h1>404 Not Found</h1>} />
             </Switch>
         </div>
     );
-};
+}
 
-export default withRouter(App);
+export default App;

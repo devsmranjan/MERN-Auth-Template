@@ -1,4 +1,5 @@
 module.exports = {
-    RESET_PASSWORD: '/resetPassword/:token',
-    VERIFY_EMAIL: '/verifyEmail/:token',
+    LOGIN_PAGE: '/login',
+    SIGNUP_PAGE: '/signup',
+    USER_PAGE: '/user',
 };

@@ -27,9 +27,7 @@ exports.getUser = async (req, res) => {
 
         res.status(httpStatusCodes.OK).json({
             success: true,
-            data: {
-                user: userData,
-            },
+            user: userData,
         });
     } catch (error) {
         res.status(httpStatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -67,9 +65,7 @@ exports.updateProfileDetails = async (req, res) => {
         res.status(httpStatusCodes.OK).json({
             success: true,
             message: messages.SUCCESS_PROFILE_UPDATED,
-            data: {
-                user: userData,
-            },
+            user: userData,
         });
     } catch (error) {
         res.status(httpStatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -112,7 +108,6 @@ exports.updatePassword = async (req, res) => {
 
         await userById.save();
 
-
         const userData = {
             id: userById.id,
             name: userById.name,
@@ -123,9 +118,7 @@ exports.updatePassword = async (req, res) => {
         res.status(httpStatusCodes.OK).json({
             success: true,
             message: messages.SUCCESS_PASSWORD_UPDATE,
-            data: {
-                user: userData,
-            },
+            user: userData,
         });
     } catch (error) {
         res.status(httpStatusCodes.INTERNAL_SERVER_ERROR).json({

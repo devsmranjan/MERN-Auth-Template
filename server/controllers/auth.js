@@ -93,10 +93,8 @@ exports.logIn = async (req, res) => {
 
         res.status(httpStatusCodes.OK).json({
             success: true,
-            data: {
-                token: user.generateJWT(),
-                user: userData,
-            },
+            token: user.generateJWT(),
+            user: userData,
         });
     } catch (error) {
         res.status(httpStatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -279,9 +277,7 @@ exports.checkResetPasswordLink = async (req, res) => {
 
         res.status(httpStatusCodes.OK).json({
             success: true,
-            data: {
-                token: token,
-            },
+            token: token,
         });
     } catch (error) {
         res.status(httpStatusCodes.INTERNAL_SERVER_ERROR).json({

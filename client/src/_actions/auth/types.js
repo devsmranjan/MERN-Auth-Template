@@ -1,0 +1,16 @@
+export const LOAD_USER_IN_PROGRESS = 'LOAD_USER_IN_PROGRESS';
+export const LOAD_USER_SUCCESS = 'LOAD_USER_SUCCESS';
+export const LOAD_USER_FAILURE = 'LOAD_USER_FAILURE';
+
+// signup
+export const SIGNUP_IN_PROGRESS = 'SIGNUP_IN_PROGRESS';
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
+export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
+
+// login
+export const LOGIN_IN_PROGRESS = 'LOGIN_IN_PROGRESS';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+
+// logout
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
