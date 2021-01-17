@@ -1,16 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import {
-    Modal,
-    Button,
-    Form,
-    InputGroup,
-    FormControl,
-    Alert,
-    Container,
-} from 'react-bootstrap';
+import { Button, Form, Alert, Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import Root from '../../Root';
 import routes from '../../utils/routes';
 import { LOAD_USER_FAILURE } from '../../_actions/auth/types';
 import {
